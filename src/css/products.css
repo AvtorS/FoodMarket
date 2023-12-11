@@ -10,9 +10,6 @@
   gap: 14px;
 }
 
-.open-modal {
-  cursor: pointer;
-}
 .not-found-heading {
   color: #010101;
   font-size: 18px;
@@ -57,6 +54,7 @@
   border-radius: 20px;
   background: #fafafa;
   padding: 20px;
+  cursor: pointer;
 }
 .background-img-pl {
   display: flex;
@@ -75,7 +73,7 @@
 .product-name-pl {
   margin-bottom: 10px;
   color: #010101;
-  font-family: Neue Montreal;
+  font-family: 'Neue Montreal';
   font-size: 18px;
   font-style: normal;
   font-weight: 500;

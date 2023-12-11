@@ -37,7 +37,7 @@ async function createMarkup() {
           ? `${iconsSvg}#icon-cart`
           : `${iconsSvg}#icon-shopping-cart`;
 
-        return `<li class="discount-item">
+        return `<li class="discount-item" data-id="${_id}">
            <svg class="icon-discount" width="64" height="64">
                   <use href="${iconsSvg}#icon-discount"></use>
                 </svg>
@@ -50,7 +50,7 @@ async function createMarkup() {
       <div class="discont-info-dop">
         <p class="info-price">$${price}</p>
         <div class="info-div">
-          <button class="info-title-link" data-_id="${_id}">
+          <button class="info-title-link" aria-label="Price" data-_id="${_id}">
             <svg class="img-svg-osnova" data-_id="${_id}" width="18" height="18">
               <use class="use" data-_id="${_id}"
                 href="${svgHref}"

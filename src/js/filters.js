@@ -116,20 +116,22 @@ function handleCategory(event) {
 //! якщо там пусто, якщо ні підставляємо значення в поля>
 
 function onLoad() {
-  const limit = Number(homManyLimit())
+  const { keyword, category, page, limit, byABC, byPrice, byPopularity } =
+    getCategoriesFromLS();
+  // limit = Number(homManyLimit())
   // console.log(limit)
   const obj = {
-    keyword: null,
-    category: null,
-    page: 1,
-    limit: `${limit}`,
-    // byABC: null,
-    // byPrice: 'true',
-    // byPopularity: null,
+    keyword: keyword || null,
+    category: category || null,
+    page: page || 1, // Додавання значення за замовчуванням, якщо воно відсутнє
+    limit: limit || 6, // Додавання значення за замовчуванням, якщо воно відсутнє
+    byABC: byABC || '',
+    byPrice: byPrice || '',
+    byPopularity: byPopularity || '',
   };
   const value = obj;
   const key = 'filter';
-
+  console.log(value);
   if (localStorage.getItem('filter')) {
     const filterObj = load('filter');
     if (filterObj.category !== null) {
@@ -252,7 +254,7 @@ function handleSort(event) {
       const updatedData = parsedData;
       save('filter', updatedData);
       fetchAndRender();
-    } else if (sortType === 'Show all') {
+    } else if (sortType === 'Reset All') {
       delete parsedData.byABC;
       delete parsedData.byPrice;
       delete parsedData.byPopularity;

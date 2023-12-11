@@ -85,7 +85,6 @@ const createMessage = `<div class="error-load">
         const svgHref = isIDInLocaleStorage ? `${iconSvg}#icon-cart` : `${iconSvg}#icon-shopping-cart`;
 
         return `<li class="item-pl" data-id="${_id}">
-        <div class="open-modal">
                 <div class="background-img-pl">
                     <img src="${img}" alt="" class="img-pl" loading="lazy" />
                 </div>
@@ -97,10 +96,9 @@ const createMessage = `<div class="error-load">
                     <p class="paragraph-pl">Size: <b class="value-pl">${size}</b></p>
                     <p class="paragraph-pl">Popularity: <b class="value-pl">${popularity}</b></p>
                 </div>
-                </div>
                 <div class="price-container-pl">
                     <b class="price-pl">$${price}</b>
-                    <button class="btn-pl" ${
+                    <button aria-label="add basket" class="btn-pl" ${
                       isIDInLocaleStorage ? 'disabled' : ''
                     }>
                         <svg class="icon-pl">
@@ -138,6 +136,7 @@ function handleButtonClick(event) {
       const dataId = closestLi.dataset.id;
       // знаходимо продукт за id в масиві foodInfo
       const clickedProduct = foodInfo.find(product => product._id === dataId);
+      checkId(closestLi)
       // перевірка чи знайдено продукт
       if (clickedProduct) {
         // виклик функції на додавання в localeStorage
@@ -157,6 +156,28 @@ function handleButtonClick(event) {
     const clickedId = clickedLi.dataset.id;
     openModalProduct(clickedId);
   }
+}
+
+function checkId(id) {
+  const idPorduct = id.dataset.id;
+  const allPopular = document.querySelectorAll(".popular-list .item-popular")
+  const allDiscount = document.querySelectorAll(".discount-list .discount-item")
+  allPopular.forEach((elem) => {
+    if (elem.dataset.id === idPorduct) {
+      const btn = elem.querySelector(".popularBtn")
+      const svg = btn.querySelector(".icon-popular use")
+      svg.setAttribute('href', `${iconSvg}#icon-cart`)
+      btn.setAttribute("disabled", true)
+    }
+  })
+  allDiscount.forEach((elem) => {
+    if (elem.dataset.id === idPorduct) {
+      const btn = elem.querySelector(".info-div .info-title-link")
+      const svg = btn.querySelector(".img-svg-osnova use")
+      svg.setAttribute('href', `${iconSvg}#icon-cart`)
+      btn.setAttribute("disabled", true)
+    }
+  })
 }
 
 function add(elem, arr) {
@@ -301,3 +322,4 @@ function thresholdOfSwitches(oldWidth, newWidth) {
     )
   );
 }
+
